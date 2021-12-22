@@ -22,6 +22,11 @@ header .scorentimer {
     color: cornsilk;
 }
 
+.answer-button {
+    background-color: darkblue;
+    color: cornsilk;
+}
+
 .quizStart {
     background: darkgoldenrod;
 }
