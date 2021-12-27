@@ -2,34 +2,44 @@ header {
     background-color: aqua;
     padding: 10px;
     border: bottom 5px;
-}
-
-header .scorentimer {
     display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
     flex: 1;
-    width: 50%;
-    justify-content: space-around;
-
 }
 
- {
-
+.scorentimer {
+    width:50%;
+  
+    flex:1;
+    flex-wrap: wrap;
+    float: left;
+    text-align: center;
 }
 
-.start-button {
-    outline: none;
-    background-color: blueviolet;
-    color: cornsilk;
-}
 
-.answer-button {
-    background-color: darkblue;
-    color: cornsilk;
-}
+header h4 {
+    font-size: larger;
+    color:black;
 
-.quizStart {
-    background: darkgoldenrod;
 }
-.quizStart h3 {
-    font-weight: bold;
-}
+body {
+    font-family: sans-serif;
+    background-color: #FFFFE0
+  }
+  
+  .container {
+    width: 90%;
+    height: 400px;
+    margin-top: 25px;
+    margin: 35px auto;
+  }
+
+  
+  .startbtn {
+      color:indigo;
+      
+  }
+  .qbtn {
+      list-style: none;
+  }

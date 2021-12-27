@@ -16,3 +16,22 @@ THEN I can save my initials and score
 Repository contains multiple descriptive commit messages.
 
 Repository contains a high-quality README file with description, screenshot, and link to deployed application.
+
+element.textContent = element.dataset.item;
+data-item="welcome" 
+
+
+  .box {
+    display: block;
+    position:absolute;
+    float: center;
+    width: 80%;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: lightgray;
+    text-align: center;
+    line-height: 20px;
+    font-size: 15px;
+    color: darkblue;
+  }
