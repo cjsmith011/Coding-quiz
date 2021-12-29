@@ -3,29 +3,62 @@
 var timerEl = document.querySelector('#startbtn');
 var startQuizEl = document.querySelector('#startbtn');
 
-var question1El = document.querySelector('q1options');
+//var question1El = document.querySelector('q1options');
 var quizContainer = document.getElementById("quiz");
+var resultsContainer = document.getElementById("results");
+var submitButton = document.getElementById("submit");
 var myQuestions = [
   {
     question: "Commonly used data types do NOT include:",
     answers: {
-      a: "1. strings",
-      b: "2. booleans",
-      c: "3. alerts",
-      d: "4. numbers"
+      1: "strings",
+      2: "booleans",
+      3: "alerts",
+      4: "numbers"
     },
-    correctAnswer: "c"
+    correctAnswer: "3"
   },
   {
     question: "The condition in an if/else statement is enclosed with ______.",
     answers: {
-      a: "1. quotes",
-      b: "2. curly brackets",
-      c: "3. parenthesis",
-      d: "4. square brackets"
+      1: "quotes",
+      2: "curly brackets",
+      3: "parenthesis",
+      4: "square brackets"
     },
-    correctAnswer: "c"
-  }
+    correctAnswer: "3"
+  },
+  {
+    question: "Arrays in JavaScript can be used to store______.",
+    answers: {
+      1: "numbers and strings",
+      2: "other arrays",
+      3: "booleans",
+      4: "all of the above"
+    },
+    correctAnswer: "4"
+  },
+  {
+    question: "String values must be enclosed within ______ when being assigned to variables.",
+    answers: {
+      1: "commas",
+      2: "curly brackets",
+      3: "quotes",
+      4: "parenthesis"
+    },
+    correctAnswer: "3"
+  },
+  {
+    question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: {
+      1: "JavaScript",
+      2: "terminal/bash",
+      3: "for loops",
+      4: "console log"
+    },
+    correctAnswer: "4"
+  },
+  
 ];
 
 function buildQuiz() {
@@ -36,12 +69,12 @@ function buildQuiz() {
     (currentQuestion, questionNumber) => {
       var answers = [];
 
-      for(letter in currentQuestion.answers){
+      for(number in currentQuestion.answers){
         answers.push(
           `<label>
-          <input type="button" name="question${questionNumber}" value=${letter}">
-          ${letter} :
-          ${currentQuestion.answers[letter]}
+          <input type="radio" class="qbtn" name="question${questionNumber} value=${number}">
+          ${number} :
+          ${currentQuestion.answers[number]}
           </label>`
         );
       }
@@ -54,15 +87,28 @@ function buildQuiz() {
   quizContainer.innerHTML = output.join('');
 }
 
-// var answers1 = ["1.strings", "2.booleans", "3.alerts", "4.numbers"];
-// document.getElementById("answers1Print").innerHTML = answers1;
+function giveResults() {
+  var answerHandlers = quizContainer.querySelectorAll('.answers');
+  let numCorrect = 0;
+  myQuestions.forEach( (currentQuestion,questionNumber) => {
+    var answerHandler = answerHandlers[questionNumber];
+    var selector = `input[name=question${questionNumber}]:checked`;
+    var userAnswer = (answerHandler.querySelector(selector) || {}).value;
+    
+    if(userAnswer === currentQuestion.correctAnswer){
+      numCorrect++;
 
-// console.log(answers1 [2]);
-// //create clickable event for each answer
+      answerHandlers[questionNumber].style.color = "green";
+      
+    } else {
+      answerHandlers[questionNumber].style.color = "darkred";
 
-// //if 
+    }
+ 
+  });
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
 
-
+}
 
 // function question1() {
 //   console.log("question 1 is starting");
@@ -160,3 +206,4 @@ function countdown() {
 
 buildQuiz();
 
+submitButton.addEventListener('click', giveResults);

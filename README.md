@@ -1,5 +1,9 @@
 # Code-Quiz
 
+references: sitepoint.com/simple-javascript-quiz/
+
+<[screenshot](.assets/screenshot.png)>
+
 Acceptance Criteria:
 GIVEN I am taking a code quiz
 WHEN I click the start button

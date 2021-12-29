@@ -77,14 +77,24 @@ body {
       flex-wrap: wrap;
       box-shadow: darkslateblue;
         }
-
+.qbtn {
+    background-color: indigo;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
 .qbtn:hover {
     background-color: deepskyblue;
 }
 .qbtn:active {
     font-size: larger;
 }
-
+#answers {
+  flex-wrap: wrap;
+  font-weight: bold;
+}
+#break {
+  height: 10px;
+}
   footer {
       background-color: aqua;
       margin: 5px;
