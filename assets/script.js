@@ -1,200 +1,129 @@
 
-//add variables here
-var timerEl = document.querySelector('#startbtn');
+//all global variables
+var time = (5 *12);
+var timeInterval;
+var timerEl = document.querySelector('#time');
 var startQuizEl = document.querySelector('#startbtn');
-
-//var question1El = document.querySelector('q1options');
+var answerListEl = document.querySelector("#answerList");
 var quizContainer = document.getElementById("quiz");
-var resultsContainer = document.getElementById("results");
-var submitButton = document.getElementById("submit");
+var resultsContainer = document.getElementById("#results");
+var submitButton = document.getElementById("#submit");
+//main variable with the questions and the answers
 var myQuestions = [
   {
     question: "Commonly used data types do NOT include:",
-    answers: {
-      1: "strings",
-      2: "booleans",
-      3: "alerts",
-      4: "numbers"
-    },
-    correctAnswer: "3"
+    answers: ["strings", "booleans", "alerts", "numbers"],
+    correctAnswer: "alerts"
   },
   {
     question: "The condition in an if/else statement is enclosed with ______.",
-    answers: {
-      1: "quotes",
-      2: "curly brackets",
-      3: "parenthesis",
-      4: "square brackets"
-    },
-    correctAnswer: "3"
+    answers: ["quotes", "curly brackets", "parenthesis", "square brackets"],
+    correctAnswer: "parenthesis"
   },
   {
     question: "Arrays in JavaScript can be used to store______.",
-    answers: {
-      1: "numbers and strings",
-      2: "other arrays",
-      3: "booleans",
-      4: "all of the above"
-    },
-    correctAnswer: "4"
+    answers: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+    correctAnswer: "all of the above"
   },
   {
     question: "String values must be enclosed within ______ when being assigned to variables.",
-    answers: {
-      1: "commas",
-      2: "curly brackets",
-      3: "quotes",
-      4: "parenthesis"
-    },
-    correctAnswer: "3"
+    answers: ["commas", "curly brackets", "quotes", "parenthesis"],
+    correctAnswer: "quotes"
   },
   {
     question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-    answers: {
-      1: "JavaScript",
-      2: "terminal/bash",
-      3: "for loops",
-      4: "console log"
-    },
-    correctAnswer: "4"
+    answers: ["JavaScript", "terminal/bash", "for loops", "console log"],
+      correctAnswer: "console log"
   },
   
 ];
+//set the questions at zero to start
+var currentIndex = 0;
+//starting quiz//
+function quizStart() {
+  var kickOff = document.getElementById("welcomebox");
+  console.log("found the welcomebox");
+  kickOff.setAttribute("class", "hide");
+
+  //this will remove a class for the questions//
+  quizContainer.removeAttribute("class");
+
+  //start the timer//
+  timeInterval = setInterval(countdown,1000);
+  timerEl.textContent = time;
+  buildQuiz();
+};
+
 
 function buildQuiz() {
+  var currentQuestion = myQuestions[currentIndex];
+  var questionTitle = document.getElementById("questionTitle");
+  questionTitle.textContent = currentQuestion.question;
+  answerListEl.innerHTML = "";
+  //loop over the choices//
+  currentQuestion.answers.forEach(function(answer, i) {
+    var btnAnswer = document.createElement("button");
+    btnAnswer.setAttribute("class", "answer");
+    btnAnswer.setAttribute("value", answer);
+    btnAnswer.textContent = i + 1 + ". " + answer;
 
-  var output = [];
-
-  myQuestions.forEach(
-    (currentQuestion, questionNumber) => {
-      var answers = [];
-
-      for(number in currentQuestion.answers){
-        answers.push(
-          `<label>
-          <input type="radio" class="qbtn" name="question${questionNumber} value=${number}">
-          ${number} :
-          ${currentQuestion.answers[number]}
-          </label>`
-        );
-      }
-     output.push(
-       `<div class="question"> ${currentQuestion.question} </div>
-       <div class="answers"> ${answers.join('')} </div>`
-     ); 
-    }
-  );
-  quizContainer.innerHTML = output.join('');
+    btnAnswer.onclick = giveResults;
+    answerListEl.appendChild(btnAnswer);
+  });
 }
+  
 
 function giveResults() {
-  var answerHandlers = quizContainer.querySelectorAll('.answers');
-  let numCorrect = 0;
-  myQuestions.forEach( (currentQuestion,questionNumber) => {
-    var answerHandler = answerHandlers[questionNumber];
-    var selector = `input[name=question${questionNumber}]:checked`;
-    var userAnswer = (answerHandler.querySelector(selector) || {}).value;
+  //check if the user guessed wrong
+  if(this.value !== myQuestions[currentIndex].answer) {
     
-    if(userAnswer === currentQuestion.correctAnswer){
-      numCorrect++;
-
-      answerHandlers[questionNumber].style.color = "green";
-      
-    } else {
-      answerHandlers[questionNumber].style.color = "darkred";
-
+  //-10 seconds if wrong
+    time -= 10;
+    if(time <0) {
+      time = 0;
     }
- 
-  });
-    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  //display new time on page (minus 10 secs)
+    timerEl.textContent = time;
+  //if right no action, just move on
+    currentIndex++;
+  //have we run out of questions (max 5)?
+    if(currentIndex === myQuestions.length) {
+      endQuiz();
+    } else {
+      buildQuiz();
+    }
+  }
 
+function endQuiz() {
+  clearInterval(timeInterval);
+  var showFinal = document.getElementById("box");
+  showFinal.removeAttribute("class");
+  var finalScore = document.getElementById("results");
+  finalScore.textContent = time;
+  quizContainer.setAttribute("class", "hide");
+
+};
 }
-
-// function question1() {
-//   console.log("question 1 is starting");
-//   for (var i=0; i <answers1.length; i++) {
-//     var btn1 = document.createElement("button");
-//     var t = document.createTextNode(answers1[i]);
-//     btn1.appendChild(t);
-//     question1El.appendChild(btn1);
-//   }
-//   question1();
-
-//   function answer1Select (event) {
-//       var response = event.target;
-    
-//       if (onclick = answers1[3] {
-//       response.textContent = "Your answer is Correct!"    
-//       } else {
-//       response.textContent = "Your answer is wrong, :(";
-//      } 
-// }
-
-//should the answers be arrays?
-//target the correct answer in the array and then do an if/then to return wrong/right
-//var question = indexQuestions[0];
-
-//
-
-//Question 1 show the 4 options as buttons that can be clicked
-//return "Wrong" for the 3 wrong answers
-//return "Right" for the 1 right answer
+//high score, get value of the input box, value can't be empty (if)
+//get the save scores from local storage, if null then empty array
+//variable for score
+//create an object for the score for the current user - score is time
+//save it in local storage and build a high score html page
+//3 buttons - start, score, initials entered?  check for the enter
 
 
-//Question 2
 
-//
-
-//deduct 10 seconds from the timer if wrong answer
-
-//add the unhiding piece
-// startQuizEl.addEventListener("click", function() {
-//   var z = document.getElementsByClassName("box");
-//   if (z.style.display === "none"); {
-//     z.style.display = "block";
-//   } else {
-//     z.style.display = "none";
-//   }
-// })
-
-//add the remove piece
-
-// container.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   if (element.matches(".box")) {
-//     var state = element.getAttribute("data-state");
-
-//   if (state === "hidden") {
-    
-//     element.dataset.state = "visible";
-//   } else {
-//     element.textContent= "";
-//     CustomElementRegistry.setAttribute("data-state", "hidden");
-
-//   }
-    
-//   }
-// });
 
 //build the timer
 function countdown() {
   console.log("countdown");
-    var timeLeft = 60;
-    var timeInterval = setInterval(function() {
-        if (timeLeft >1) {
-        timer.textContent = "Timer: " + timeLeft;
-        timeLeft--;
-        } else {
-            timer.textContent = "Time is up!";
-            clearInterval(timeInterval);
-        }
-    }, 1000);
-    };
-//when the user clicks on Start Quiz, then start the timer    
- timerEl.addEventListener("click", function() {
-  countdown();
- });
+    time--;
+    timerEl.textContent = time;
+    //end game if time runs out//
+    if (time <= 0) {
+      endQuiz();
+    }
+  };
 
 //build the high score link
 
@@ -203,7 +132,6 @@ function countdown() {
 //build the 5 functions that will run thru the questions
 
 //build the function that will run the score and allow user input of initials
+quizStart();
 
-buildQuiz();
-
-submitButton.addEventListener('click', giveResults);
+//submitButton.addEventListener('click', giveResults);

@@ -12,75 +12,44 @@
   <header>
     
       <h4>View High Score</h4><a href=""></a>
-      <h4 id="timer"></h4>
+      <h4 class="timer">Time: <span id="time">0</span></h4>
    
   </header>
   <main>
   <div class="container">
-    <div class="welcomebox">
+    <div id="welcomebox">
       <h3>Coding Quiz Challenge</h3>
       <p>Try to answer the following code-related questions within the time limit</p>
       <p>Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
       <button id="startbtn">Start Quiz</button>
     </div>
-    <div id="quiz"></div>
+<!--This is the question screen to loop through for each question in the array-->
+    <div id="quiz" class="hide">
+      
+      <h2 id="questionTitle"></h2>
+      <div id="answerList"></div>
+    </div>
     <div id="break"></div>
-    <!--<div class="box">
-      <h3>Commonly used data types do NOT include:</h3>
-        <div id="answers1Print"></div>
-        <br>
-        <p class="response"></p>
-    </div>
-    <div class="box">
-      <h3>The condition in an if/else statement is enclosed with ______.</h3>
-      <ul>
-        <li class="qbtn">1. quotes</li>
-        <li class="qbtn">2. curly brackets</li>
-        <li class="qbtn">3. parenthesis</li>
-        <li class="qbtn">4. square brackets</li>
-      </ul>
-    </div>
-    <div class="box">
-      <h3>Arrays in JavaScript can be used to store______.</h3>
-      <ul>
-        <li class="qbtn">1. numbers and strings</li>
-        <li class="qbtn">2. other arrays</li>
-        <li class="qbtn">3. booleans</li>
-        <li class="qbtn">4. all of the above</li>
-      </ul>
-    </div>
-    <div class="box">
-      <h3>String values must be enclosed within ______ when being assigned to variables.</h3>
-      <ul>
-        <li class="qbtn">1. commas</li>
-        <li class="qbtn">2. curly brackets</li>
-        <li class="qbtn">3. quotes</li>
-        <li class="qbtn">4. parenthesis</li>
-      </ul>
-    </div>
-    <div class="box">
-      <h3>A very useful tool used during development and debugging for printing content to the debugger is:</h3>
-      <ul>
-        <li class="qbtn">1. JavaScript</li>
-        <li class="qbtn">2. terminal/bash</li>
-        <li class="qbtn">3. for loops</li>
-        <li class="qbtn">4. console log</li>
-      </ul>
-    </div>-->
+    
     <button id = "submit">Submit your responses</button>
-    <div class="box">
+
+    <div id="box" class="hide">
       <h3>All done!</h3>
      <p>Your final score is: <span id = "results"></span></p>
      <p>Enter initials:</p>
     </div>
 
-  <script src="./assets/script.js"></script>
+  
   </div>
   </main>
-
-</body>
 
 <footer>
   <h4>&copy;2022, Coding Quiz Team</h4>
 </footer>
+
+<script src="./assets/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+</body>
 </html>
