@@ -31,14 +31,20 @@
     </div>
     <div id="break"></div>
     
-    <button id = "submit">Submit your responses</button>
+    <!--<button id = "submit">Submit your responses</button>-->
 
     <div id="box" class="hide">
       <h3>All done!</h3>
      <p>Your final score is: <span id = "results"></span></p>
-     <p>Enter initials:</p>
+     <label for="initials">First and Last Initial:  </label><input type="text" name="initials" id="initials" placeholder="XX">
+     <button id="initialsButton">Submit for score</button>
     </div>
 
+    <div id="highscore" class="hide">
+      <h3>High Scores</h3>
+      <p id ="initialsScore">XX</p>
+      <button id="goBack">Go back</button><span>    </span><button id="clearHighscore">Clear high score</button>
+    </div>
   
   </div>
   </main>

@@ -1,13 +1,16 @@
 
 //all global variables
-var time = (5 *12);
+var time = (60);
 var timeInterval;
 var timerEl = document.querySelector('#time');
 var startQuizEl = document.querySelector('#startbtn');
 var answerListEl = document.querySelector("#answerList");
 var quizContainer = document.getElementById("quiz");
 var resultsContainer = document.getElementById("#results");
-var submitButton = document.getElementById("#submit");
+var initialsInput = document.querySelector("#initials");
+var initialsCapture = document.querySelector("#initialsButton");
+var finalContainer = document.getElementById("box");
+var goBackEl = document.getElementById("goBack");
 //main variable with the questions and the answers
 var myQuestions = [
   {
@@ -39,22 +42,24 @@ var myQuestions = [
 ];
 //set the questions at zero to start
 var currentIndex = 0;
-//starting quiz//
+//starting quiz upon user click of the start button//
 function quizStart() {
   var kickOff = document.getElementById("welcomebox");
-  console.log("found the welcomebox");
+  //hide the welcome screen
   kickOff.setAttribute("class", "hide");
 
-  //this will remove a class for the questions//
+  //this will remove a class for the questions so the first will show on the dom//
   quizContainer.removeAttribute("class");
 
-  //start the timer//
+  //start the timer and countdown by 1 sec//
   timeInterval = setInterval(countdown,1000);
   timerEl.textContent = time;
   buildQuiz();
-};
+}
 
 
+
+//run thru the questions in the array of myQuestions
 function buildQuiz() {
   var currentQuestion = myQuestions[currentIndex];
   var questionTitle = document.getElementById("questionTitle");
@@ -75,12 +80,14 @@ function buildQuiz() {
 
 function giveResults() {
   //check if the user guessed wrong
-  if(this.value !== myQuestions[currentIndex].answer) {
+  if(this.value !== myQuestions[currentIndex].correctAnswer) {
     
   //-10 seconds if wrong
     time -= 10;
     if(time <0) {
       time = 0;
+      clearInterval(timeInterval);
+      endQuiz();
     }
   //display new time on page (minus 10 secs)
     timerEl.textContent = time;
@@ -93,7 +100,7 @@ function giveResults() {
       buildQuiz();
     }
   }
-
+}
 function endQuiz() {
   clearInterval(timeInterval);
   var showFinal = document.getElementById("box");
@@ -101,16 +108,23 @@ function endQuiz() {
   var finalScore = document.getElementById("results");
   finalScore.textContent = time;
   quizContainer.setAttribute("class", "hide");
+  
 
-};
 }
+
+function highScore() {
+  var showScore = document.getElementById("highscore");
+  showScore.removeAttribute("class");
+  finalContainer.setAttribute("class", "hide");
+  var scoreBox = document.getElementById("initialsScore");
+  scoreBox.textContent = time;
+};
 //high score, get value of the input box, value can't be empty (if)
 //get the save scores from local storage, if null then empty array
 //variable for score
 //create an object for the score for the current user - score is time
 //save it in local storage and build a high score html page
 //3 buttons - start, score, initials entered?  check for the enter
-
 
 
 
@@ -123,15 +137,24 @@ function countdown() {
     if (time <= 0) {
       endQuiz();
     }
-  };
+  }
 
-//build the high score link
 
-//build the function that will welcome the user
-
-//build the 5 functions that will run thru the questions
-
-//build the function that will run the score and allow user input of initials
-quizStart();
-
+startQuizEl.addEventListener('click',quizStart);
 //submitButton.addEventListener('click', giveResults);
+
+
+//get user initials at the finish and store them
+initialsCapture.addEventListener("click", function(event) {
+  event.preventDefault();
+  var user = {
+    initials: initialsInput.value.trim(),
+  };
+  localStorage.setItem("user", JSON.stringify(user));
+
+highScore();
+});
+
+goBackEl.addEventListener('click',quizStart);
+
+clearScoreEl.addEventListener('click',scoreBox.textContent= "");

@@ -68,28 +68,10 @@ body {
 #startbtn {
       background-color:indigo;
       color: gainsboro;
+      border-radius: 6px;
         }
 
-.q1options {
-      list-style: none;
-      background-color: rgb(190, 184, 184);
-      outline: black;
-      font-size: small;
-      padding: 10px 15px;
-      flex-wrap: wrap;
-      box-shadow: darkslateblue;
-        }
-.qbtn {
-    background-color: indigo;
-    border-radius: 6px;
-    padding: 8px 12px;
-}
-.qbtn:hover {
-    background-color: deepskyblue;
-}
-.qbtn:active {
-    font-size: larger;
-}
+
 #answers {
   flex-wrap: wrap;
   font-weight: bold;
@@ -97,9 +79,28 @@ body {
 #break {
   height: 10px;
 }
-  footer {
+footer {
       background-color: aqua;
       margin: 5px;
       height: 40px;
       text-align: center;
-      }
+}
+#initialsButton {
+  background-color: indigo;
+  border-radius: 6px;
+  color: gainsboro;
+}
+#goBack {
+  background-color: indigo;
+  border-radius: 6px;
+  color: gainsboro;
+}
+#clearHighscore {
+  background-color: indigo;
+  border-radius: 6px;
+  color: gainsboro;
+}
+#initialsScore {
+  background-color: rgb(164, 119, 196);
+  width: 20%;
+}
