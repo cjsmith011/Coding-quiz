@@ -10,8 +10,12 @@ references:
 1. sitepoint.com/simple-javascript-quiz/
 2. Sandy Smith - my tutor
 
-<[screenshot](.assets/screenshot.png)>
+![deployed site screenshot](C:\Users\cjsmith\Desktop\projects\coding-quiz\assets\deployed site.PNG)
 
+
+github link: git@github.com:cjsmith011/Coding-quiz.git
+
+deployed site: https://cjsmith011.github.io/Coding-quiz/
 
 
 Repository contains multiple descriptive commit messages.

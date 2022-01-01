@@ -10,12 +10,13 @@
 </head> 
 <body>
   <header>
-    
+  <!--keeping score and timer in header to contiuously show the countdown-->
       <h4>View High Score</h4><a href=""></a>
       <h4 class="timer">Time: <span id="time">0</span></h4>
    
   </header>
   <main>
+  <!--build 1 screen to hold all the divs and refresh it with them-->
   <div class="container">
     <div id="welcomebox">
       <h3>Coding Quiz Challenge</h3>
@@ -31,7 +32,7 @@
     </div>
     <div id="break"></div>
     
-    <!--<button id = "submit">Submit your responses</button>-->
+    <!--This div will display the final results and capture the user info-->
 
     <div id="box" class="hide">
       <h3>All done!</h3>
@@ -39,7 +40,7 @@
      <label for="initials">First and Last Initial:  </label><input type="text" name="initials" id="initials" placeholder="XX">
      <button id="initialsButton">Submit for score</button>
     </div>
-
+    <!--build a screen to give the user a chance to do it again-->
     <div id="highscore" class="hide">
       <h3>High Scores</h3>
       <p id ="initialsScore">XX</p>
