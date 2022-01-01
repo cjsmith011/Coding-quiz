@@ -11,6 +11,7 @@ var initialsInput = document.querySelector("#initials");
 var initialsCapture = document.querySelector("#initialsButton");
 var finalContainer = document.getElementById("box");
 var goBackEl = document.getElementById("goBack");
+var clearScoreEl = document.getElementById("#clearHighscore");
 //main variable with the questions and the answers
 var myQuestions = [
   {
@@ -58,7 +59,6 @@ function quizStart() {
 }
 
 
-
 //run thru the questions in the array of myQuestions
 function buildQuiz() {
   var currentQuestion = myQuestions[currentIndex];
@@ -77,22 +77,25 @@ function buildQuiz() {
   });
 }
   
-
+//look at each answer and check it
 function giveResults() {
   //check if the user guessed wrong
-  if(this.value !== myQuestions[currentIndex].correctAnswer) {
-    
+  if(this.value === myQuestions[currentIndex].correctAnswer) {
+    currentIndex++;
+  } else {
   //-10 seconds if wrong
     time -= 10;
+    currentIndex++;
     if(time <0) {
       time = 0;
       clearInterval(timeInterval);
       endQuiz();
-    }
+    } 
+  }
   //display new time on page (minus 10 secs)
     timerEl.textContent = time;
   //if right no action, just move on
-    currentIndex++;
+   
   //have we run out of questions (max 5)?
     if(currentIndex === myQuestions.length) {
       endQuiz();
@@ -100,7 +103,9 @@ function giveResults() {
       buildQuiz();
     }
   }
-}
+
+
+//finish the quiz by showing the final score screen and hiding the questions
 function endQuiz() {
   clearInterval(timeInterval);
   var showFinal = document.getElementById("box");
@@ -109,9 +114,9 @@ function endQuiz() {
   finalScore.textContent = time;
   quizContainer.setAttribute("class", "hide");
   
-
 }
 
+//display user score
 function highScore() {
   var showScore = document.getElementById("highscore");
   showScore.removeAttribute("class");
@@ -119,18 +124,10 @@ function highScore() {
   var scoreBox = document.getElementById("initialsScore");
   scoreBox.textContent = time;
 };
-//high score, get value of the input box, value can't be empty (if)
-//get the save scores from local storage, if null then empty array
-//variable for score
-//create an object for the score for the current user - score is time
-//save it in local storage and build a high score html page
-//3 buttons - start, score, initials entered?  check for the enter
-
 
 
 //build the timer
 function countdown() {
-  console.log("countdown");
     time--;
     timerEl.textContent = time;
     //end game if time runs out//
@@ -140,9 +137,17 @@ function countdown() {
   }
 
 
+function goBack() {
+  var restart = document.getElementById("highscore");
+  restart.setAttribute("class", "hide");
+  quizStart();
+  currentIndex = 0;
+}
+//listen for click on Start and kickoff quiz
 startQuizEl.addEventListener('click',quizStart);
-//submitButton.addEventListener('click', giveResults);
 
+//if the user clicks the Go back button then restart the game
+goBackEl.addEventListener("click", goBack);
 
 //get user initials at the finish and store them
 initialsCapture.addEventListener("click", function(event) {
@@ -153,8 +158,4 @@ initialsCapture.addEventListener("click", function(event) {
   localStorage.setItem("user", JSON.stringify(user));
 
 highScore();
-});
-
-goBackEl.addEventListener('click',quizStart);
-
-clearScoreEl.addEventListener('click',scoreBox.textContent= "");
+})
